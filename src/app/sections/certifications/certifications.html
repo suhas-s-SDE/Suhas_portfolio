@@ -1,0 +1,19 @@
+<section id="certifications" class="certs">
+  <div class="certs__inner">
+    <div appScrollReveal>
+      <span class="section-eyebrow">Certifications & Achievements</span>
+      <h2 class="section-heading">Consistency, one streak at a time.</h2>
+    </div>
+
+    <div class="certs__grid">
+      @for (cert of certifications; track cert.title; let i = $index) {
+        <div class="cert-card" appScrollReveal [revealDelay]="i * 80">
+          <span class="cert-card__icon">{{ cert.icon }}</span>
+          <h3 class="cert-card__title">{{ cert.title }}</h3>
+          <p class="cert-card__issuer">{{ cert.issuer }}</p>
+          <p class="cert-card__desc">{{ cert.description }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

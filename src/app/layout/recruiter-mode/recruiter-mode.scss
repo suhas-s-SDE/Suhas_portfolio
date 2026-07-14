@@ -1,0 +1,130 @@
+@use '../../../styles/mixins' as m;
+
+.fab {
+  position: fixed;
+  bottom: var(--space-5);
+  right: var(--space-5);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: var(--accent-gradient);
+  color: #06060a;
+  font-weight: 700;
+  font-size: var(--fs-small);
+  box-shadow: var(--shadow-glow);
+  animation: pulse 3.5s ease-in-out infinite;
+  @include m.focus-ring;
+
+  @media (max-width: 640px) {
+    .fab__label {
+      display: none;
+    }
+    padding: 0.9rem;
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 24px rgba(99, 102, 241, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(34, 211, 238, 0.45);
+  }
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(2px);
+  z-index: 95;
+}
+
+.panel {
+  position: fixed;
+  top: 76px;
+  right: 0;
+  bottom: 0;
+  width: min(420px, 90vw);
+  background: var(--bg-elevated);
+  border-left: 1px solid var(--border-subtle);
+  z-index: 96;
+  padding: var(--space-8) var(--space-6) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  overflow-y: auto;
+  animation: slide-in var(--dur-slow) var(--ease-out);
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.panel__close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-pill);
+}
+
+.panel__title {
+  font-size: var(--fs-h2);
+}
+
+.panel__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+
+  li {
+    position: relative;
+    padding-left: var(--space-5);
+    color: var(--text-secondary);
+    font-size: var(--fs-small);
+    line-height: 1.5;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+    }
+  }
+}
+
+.panel__cta {
+  margin-top: auto;
+  justify-content: center;
+}
+
+@include m.reduced-motion {
+  .fab {
+    animation: none;
+  }
+  .panel {
+    animation: none;
+  }
+}

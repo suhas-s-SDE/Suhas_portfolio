@@ -1,0 +1,115 @@
+@use '../../../../styles/mixins' as m;
+
+:host {
+  display: flex;
+  width: 100%;
+}
+
+.pcard {
+  width: 100%;
+  @include m.card;
+  @include m.card-hover;
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  border-top: 3px solid var(--accent-indigo);
+
+  &--indigo {
+    border-top-color: var(--accent-indigo);
+  }
+  &--cyan {
+    border-top-color: var(--accent-cyan);
+  }
+  &--amber {
+    border-top-color: var(--accent-amber);
+  }
+  &--emerald {
+    border-top-color: var(--success);
+  }
+}
+
+.pcard__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.pcard__year {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}
+
+.pcard__live-badge {
+  display: none;
+  gap: var(--space-3);
+  font-size: var(--fs-xs);
+  font-family: var(--font-mono);
+  color: var(--accent-cyan);
+
+  &--loading {
+    color: var(--text-tertiary);
+  }
+}
+
+.pcard__title {
+  font-size: var(--fs-h3);
+}
+
+.pcard__subtitle {
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+  margin-top: calc(-1 * var(--space-2));
+}
+
+.pcard__block,
+.pcard__impact {
+  p {
+    color: var(--text-secondary);
+    font-size: var(--fs-small);
+    line-height: 1.6;
+    margin-top: var(--space-1);
+  }
+}
+
+.pcard__impact {
+  padding: var(--space-3) var(--space-4);
+  background: var(--accent-gradient-soft);
+  border-radius: var(--radius-md);
+
+  p {
+    color: var(--text-primary);
+  }
+}
+
+.pcard__label {
+  @include m.eyebrow;
+  font-size: 0.65rem;
+}
+
+.pcard__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tech-pill {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-pill);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--accent-cyan);
+}
+
+.pcard__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: auto;
+  padding-top: var(--space-3);
+}

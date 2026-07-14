@@ -1,0 +1,21 @@
+@use '../../../styles/mixins' as m;
+
+.projects {
+  @include m.section-spacing;
+}
+
+.projects__inner {
+  @include m.container;
+}
+
+.projects__grid {
+  margin-top: var(--space-7);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: var(--space-5);
+  align-items: stretch;
+
+  > div {
+    display: flex;
+  }
+}

@@ -1,0 +1,21 @@
+<button class="fab" (click)="toggle()" aria-label="Open recruiter summary">
+  <span class="fab__icon">🎯</span>
+  <span class="fab__label">Recruiter Summary</span>
+</button>
+
+@if (open()) {
+  <div class="overlay" (click)="close()"></div>
+  <aside class="panel" role="dialog" aria-label="Recruiter summary">
+    <button class="panel__close" (click)="close()" aria-label="Close">✕</button>
+    <!-- <span class="section-eyebrow">Quick Summary</span> -->
+    <h3 class="panel__title">Why {{ profile.name }}?</h3>
+    <ul class="panel__list">
+      @for (item of summary; track item) {
+        <li>{{ item }}</li>
+      }
+    </ul>
+    <a class="btn btn-primary panel__cta" [href]="profile.resumeUrl" download>
+      Download Full Resume
+    </a>
+  </aside>
+}

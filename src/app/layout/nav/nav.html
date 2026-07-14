@@ -1,0 +1,41 @@
+<nav class="nav">
+  <div class="nav__inner">
+    <button class="nav__brand" (click)="goTo('hero')" aria-label="Go to top">
+      <span class="nav__brand-mark">SS</span>
+    </button>
+
+    <ul class="nav__links">
+      @for (section of sections; track section.id) {
+        <li>
+          <button
+            class="nav__link"
+            [class.active]="spy.activeSection() === section.id"
+            (click)="goTo(section.id)"
+          >
+            {{ section.label }}
+          </button>
+        </li>
+      }
+    </ul>
+
+    <button class="nav__toggle" (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  @if (menuOpen()) {
+    <ul class="nav__mobile">
+      @for (section of sections; track section.id) {
+        <li>
+          <button
+            class="nav__link"
+            [class.active]="spy.activeSection() === section.id"
+            (click)="goTo(section.id)"
+          >
+            {{ section.label }}
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</nav>

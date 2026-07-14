@@ -1,0 +1,51 @@
+<article class="pcard" [class]="'pcard--' + project.accent">
+  <div class="pcard__top">
+    <span class="pcard__year">{{ project.year }}</span>
+    @if (stats(); as s) {
+      @if (s.status === 'ready') {
+        <div class="pcard__live-badge">
+          <span>★ {{ s.data.stars }}</span>
+          @if (s.data.language) {
+            <span>{{ s.data.language }}</span>
+          }
+          <span>Updated {{ formatUpdated(s.data.updatedAt) }}</span>
+        </div>
+      } @else if (s.status === 'loading') {
+        <div class="pcard__live-badge pcard__live-badge--loading">Fetching GitHub data…</div>
+      }
+    }
+  </div>
+
+  <h3 class="pcard__title">{{ project.title }}</h3>
+  <p class="pcard__subtitle">{{ project.subtitle }}</p>
+
+  <div class="pcard__block">
+    <span class="pcard__label">Problem</span>
+    <p>{{ project.problem }}</p>
+  </div>
+  <div class="pcard__block">
+    <span class="pcard__label">Solution</span>
+    <p>{{ project.solution }}</p>
+  </div>
+
+  <div class="pcard__impact">
+    <span class="pcard__label">Impact</span>
+    <p>{{ project.impact }}</p>
+  </div>
+
+  <div class="pcard__tech">
+    @for (t of project.tech; track t) {
+      <span class="tech-pill">{{ t }}</span>
+    }
+  </div>
+
+  <div class="pcard__actions">
+    @if (githubUrl(); as url) {
+      <a class="btn" [href]="url" target="_blank" rel="noopener">GitHub</a>
+    }
+    @if (project.liveDemoUrl) {
+      <a class="btn btn-primary" [href]="project.liveDemoUrl" target="_blank" rel="noopener">Live Demo</a>
+    }
+    <button class="btn" (click)="openDetails.emit(project)">Details</button>
+  </div>
+</article>

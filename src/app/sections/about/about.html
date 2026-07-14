@@ -1,0 +1,23 @@
+<section id="about" class="about">
+  <div class="about__inner">
+    <div class="about__intro" appScrollReveal>
+      <span class="section-eyebrow">About</span>
+      <h2 class="section-heading">A story told in outcomes, not just years.</h2>
+      <div class="about__photo-wrap">
+        <img [src]="profile.photoUrl" alt="Portrait of {{ profile.name }}" class="about__photo" />
+      </div>
+    </div>
+
+    <ol class="about__timeline">
+      @for (beat of beats; track beat.title; let i = $index) {
+        <li class="about__beat" appScrollReveal [revealDelay]="i * 90">
+          <span class="about__beat-icon">{{ beat.icon }}</span>
+          <div>
+            <h3 class="about__beat-title">{{ beat.title }}</h3>
+            <p class="about__beat-body">{{ beat.body }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

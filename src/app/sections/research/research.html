@@ -1,0 +1,42 @@
+<section id="research" class="research">
+  <div class="research__inner">
+    <div appScrollReveal>
+      <span class="section-eyebrow">Research & Publications</span>
+      <h2 class="section-heading">Where curiosity turned into published research.</h2>
+    </div>
+
+    @for (pub of publications; track pub.title) {
+      <div class="pub-card" appScrollReveal>
+        <div class="pub-card__badge">
+          <span class="pub-card__badge-mark">IEEE</span>
+          <span>Xplore Publication · {{ pub.year }}</span>
+        </div>
+
+        <h3 class="pub-card__title">{{ pub.title }}</h3>
+
+        <div class="pub-card__grid">
+          <div>
+            <h4>Contribution</h4>
+            <p>{{ pub.contribution }}</p>
+          </div>
+          <div>
+            <h4>AI Innovation</h4>
+            <ul>
+              @for (item of pub.innovations; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </div>
+          <div>
+            <h4>Learning Outcomes</h4>
+            <ul>
+              @for (item of pub.outcomes; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

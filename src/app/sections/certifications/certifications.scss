@@ -1,0 +1,52 @@
+@use '../../../styles/mixins' as m;
+
+.certs {
+  @include m.section-spacing;
+}
+
+.certs__inner {
+  @include m.container;
+}
+
+.certs__grid {
+  margin-top: var(--space-7);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-5);
+}
+
+.cert-card {
+  @include m.card;
+  @include m.card-hover;
+  padding: var(--space-5);
+  text-align: left;
+
+  &:hover .cert-card__icon {
+    transform: scale(1.15) rotate(-4deg);
+  }
+}
+
+.cert-card__icon {
+  font-size: 2rem;
+  display: inline-block;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.cert-card__title {
+  font-size: var(--fs-body-lg);
+  margin-top: var(--space-3);
+}
+
+.cert-card__issuer {
+  color: var(--accent-cyan);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  margin-top: var(--space-1);
+}
+
+.cert-card__desc {
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  margin-top: var(--space-3);
+}

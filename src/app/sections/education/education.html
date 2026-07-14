@@ -1,0 +1,24 @@
+<section id="education" class="edu">
+  <div class="edu__inner">
+    <div appScrollReveal>
+      <span class="section-eyebrow">Education</span>
+      <h2 class="section-heading">A steady climb, not a straight line of luck.</h2>
+    </div>
+
+    <div class="edu__timeline">
+      @for (entry of education; track entry.institution; let i = $index) {
+        <div class="edu-step" appScrollReveal [revealDelay]="i * 100">
+          <div class="edu-step__bar-track">
+            <div class="edu-step__bar" [style.height.%]="entry.scoreValue"></div>
+          </div>
+          <div class="edu-step__body">
+            <span class="edu-step__year">{{ entry.year }}</span>
+            <h3 class="edu-step__institution">{{ entry.institution }}</h3>
+            <p class="edu-step__credential">{{ entry.credential }}</p>
+            <span class="edu-step__score">{{ entry.score }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

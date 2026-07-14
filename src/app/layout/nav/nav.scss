@@ -1,0 +1,116 @@
+@use '../../../styles/mixins' as m;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  background: rgba(7, 7, 11, 0.72);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.nav__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  @include m.container;
+}
+
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  padding: 0;
+}
+
+.nav__brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-items: center;
+  background: var(--accent-gradient);
+  color: #06060a;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-small);
+}
+
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.nav__link {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  padding: 0.5rem 0.85rem;
+  border-radius: var(--radius-pill);
+  transition: color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out);
+  @include m.focus-ring;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+
+  &.active {
+    color: var(--text-primary);
+    background: var(--bg-card);
+  }
+}
+
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: var(--space-2);
+
+  span {
+    width: 22px;
+    height: 2px;
+    background: var(--text-primary);
+    border-radius: 2px;
+  }
+
+  @media (max-width: 900px) {
+    display: flex;
+  }
+}
+
+.nav__mobile {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: var(--space-3) var(--space-5) var(--space-5);
+  background: var(--bg-base);
+  border-bottom: 1px solid var(--border-subtle);
+
+  .nav__link {
+    width: 100%;
+    text-align: left;
+    padding: var(--space-3) var(--space-2);
+  }
+}

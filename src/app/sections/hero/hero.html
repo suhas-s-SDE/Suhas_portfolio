@@ -1,0 +1,72 @@
+<section id="hero" class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <div class="hero__grid"></div>
+
+    <div class="hero__rain">
+      @for (col of codeRainColumns; track $index) {
+        <div class="hero__rain-col" [style.left]="col.left" [style.--dur]="col.duration" [style.--delay]="col.delay">
+          @for (token of col.tokens; track $index) {
+            <span>{{ token }}</span>
+          }
+          @for (token of col.tokens; track $index) {
+            <span>{{ token }}</span>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="hero__glow hero__glow--1"></div>
+    <div class="hero__glow hero__glow--2"></div>
+  </div>
+
+  <div class="hero__content">
+    <div class="hero__node-graph" aria-hidden="true">
+      <svg class="hero__node-lines" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path class="hero__node-link hero__node-link--1" d="M60,6 C66,14 70,20 88.94,37.44" />
+        <path class="hero__node-link hero__node-link--2" d="M88.94,37.44 C70,36 68,42 64,48" />
+
+        <circle class="hero__node-packet hero__node-packet--1" r="0.9">
+          <animateMotion dur="4.5s" repeatCount="indefinite" path="M60,6 C66,14 70,20 88.94,37.44" />
+        </circle>
+        <circle class="hero__node-packet hero__node-packet--2" r="0.9">
+          <animateMotion dur="4.5s" repeatCount="indefinite" path="M88.94,37.44 C70,36 68,42 64,48" />
+        </circle>
+      </svg>
+
+      <div class="hero__node" style="top: 4%; left: 60%;">
+        <span class="hero__node-icon">⚙️</span>
+        <span class="hero__node-label">Software Engineering</span>
+      </div>
+
+      <div class="hero__node" style="top: 37.44%; left: 88.94%;">
+        <span class="hero__node-icon">📊</span>
+        <span class="hero__node-label">Data Analytics</span>
+      </div>
+
+      <div class="hero__node" style="top: 46%; left: 64%;">
+        <span class="hero__node-icon">🤖</span>
+        <span class="hero__node-label">Artificial Intelligence</span>
+      </div>
+    </div>
+
+    <p class="section-eyebrow">{{ profile.location }} </p>
+    <h1 class="hero__headline">Suhas S</h1>
+
+    <div class="hero__role">
+      <span class="hero__role-word">{{ profile.roles[roleIndex()] }}</span>
+    </div>
+
+    <p class="hero__mission">{{ profile.mission }}</p>
+
+    <div class="hero__actions">
+      <a class="btn btn-primary" [href]="profile.resumeUrl" download>⬇ Download Resume</a>
+      <a class="btn" [href]="profile.github" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" [href]="profile.linkedin" target="_blank" rel="noopener">LinkedIn</a>
+      <button class="btn" (click)="scrollToContact()">Contact Me</button>
+    </div>
+  </div>
+
+  <!-- <div class="hero__scroll-cue" aria-hidden="true">
+    <span></span>
+  </div> -->
+</section>

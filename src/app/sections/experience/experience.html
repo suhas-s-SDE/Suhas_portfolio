@@ -1,0 +1,61 @@
+<section id="experience" class="experience">
+  <div class="experience__inner">
+    <div appScrollReveal>
+      <span class="section-eyebrow">Experience</span>
+      <h2 class="section-heading">Ownership, not just tasks.</h2>
+    </div>
+
+    <ol class="timeline">
+      @for (entry of entries; track entry.company; let i = $index) {
+        <li class="timeline__item" appScrollReveal [revealDelay]="i * 120">
+          <div class="timeline__marker">
+            <span class="timeline__dot" [class.current]="entry.isCurrent"></span>
+          </div>
+
+          <div class="timeline__card">
+            <div class="timeline__head">
+              <div>
+                <h3 class="timeline__role">{{ entry.role }}</h3>
+                <p class="timeline__company">{{ entry.company }}</p>
+              </div>
+              <span class="timeline__duration" [class.current]="entry.isCurrent">
+                {{ entry.duration }}
+                @if (entry.isCurrent) {
+                  <span class="timeline__live">● live</span>
+                }
+              </span>
+            </div>
+
+            <p class="timeline__summary">{{ entry.summary }}</p>
+
+            <div class="timeline__metrics">
+              @for (metric of entry.impactMetrics; track metric.label) {
+                <div class="metric-chip">
+                  <span class="metric-chip__value">{{ metric.value }}</span>
+                  <span class="metric-chip__label">{{ metric.label }}</span>
+                </div>
+              }
+            </div>
+
+            <button class="timeline__toggle" (click)="toggle(i)">
+              {{ expanded() === i ? 'Hide details' : 'Show what I did' }}
+            </button>
+
+            @if (expanded() === i) {
+              <ul class="timeline__bullets">
+                @for (bullet of entry.bullets; track bullet) {
+                  <li>{{ bullet }}</li>
+                }
+              </ul>
+              <div class="timeline__tech">
+                @for (t of entry.tech; track t) {
+                  <span class="tech-pill">{{ t }}</span>
+                }
+              </div>
+            }
+          </div>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

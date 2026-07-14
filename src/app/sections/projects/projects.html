@@ -1,0 +1,20 @@
+<section id="projects" class="projects">
+  <div class="projects__inner">
+    <div appScrollReveal>
+      <span class="section-eyebrow">Projects</span>
+      <h2 class="section-heading">Systems built to solve real problems.</h2>
+    </div>
+
+    <div class="projects__grid">
+      @for (project of projects; track project.slug; let i = $index) {
+        <div appScrollReveal [revealDelay]="i * 90">
+          <app-project-card [project]="project" (openDetails)="open($event)" />
+        </div>
+      }
+    </div>
+  </div>
+
+  @if (activeProject(); as project) {
+    <app-project-detail-modal [project]="project" (closed)="close()" />
+  }
+</section>

@@ -1,0 +1,24 @@
+<section id="skills" class="skills">
+  <div class="skills__inner">
+    <div appScrollReveal>
+      <span class="section-eyebrow">Skills Universe</span>
+      <h2 class="section-heading">Tools I reach for to ship real systems.</h2>
+    </div>
+
+    <div class="skills__grid">
+      @for (category of categories; track category.name; let i = $index) {
+        <div class="cluster" appScrollReveal [revealDelay]="i * 70">
+          <div class="cluster__head">
+            <span class="cluster__icon">{{ category.icon }}</span>
+            <h3 class="cluster__name">{{ category.name }}</h3>
+          </div>
+          <div class="cluster__chips">
+            @for (skill of category.skills; track skill) {
+              <span class="chip">{{ skill }}</span>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

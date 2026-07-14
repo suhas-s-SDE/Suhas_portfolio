@@ -1,0 +1,375 @@
+@use '../../../styles/mixins' as m;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--nav-height));
+  padding: calc(var(--nav-height) + var(--space-6)) var(--space-5) var(--space-6);
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  top: var(--nav-height);
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 30%, transparent 0%, var(--bg-base) 82%);
+  }
+}
+
+// Faint IDE-style grid, slowly panning — background texture only
+.hero__grid {
+  position: absolute;
+  inset: -20% -10%;
+  background-image: linear-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.18;
+  mask-image: radial-gradient(ellipse 65% 55% at 50% 35%, black 35%, transparent 80%);
+  animation: grid-pan 34s linear infinite;
+}
+
+@keyframes grid-pan {
+  from {
+    background-position: 0 0, 0 0;
+  }
+  to {
+    background-position: 48px 96px, 48px 96px;
+  }
+}
+
+// Matrix-style falling code columns, dim and confined to the far background
+.hero__rain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 80%, transparent);
+}
+
+.hero__rain-col {
+  position: absolute;
+  top: -50%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  white-space: nowrap;
+  animation: rain-fall var(--dur) linear infinite;
+  animation-delay: var(--delay);
+
+  span:nth-child(3n) {
+    color: var(--accent-indigo);
+  }
+}
+
+@keyframes rain-fall {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero__rain {
+    display: none;
+  }
+}
+
+// Two soft ambient glows for depth — no more, no less
+.hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.28;
+}
+
+.hero__glow--1 {
+  top: 6%;
+  left: 6%;
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, var(--accent-cyan), transparent 70%);
+  animation: glow-float-a 18s ease-in-out infinite;
+}
+
+.hero__glow--2 {
+  bottom: 2%;
+  right: 4%;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, var(--accent-indigo), transparent 70%);
+  animation: glow-float-b 22s ease-in-out infinite;
+}
+
+@keyframes glow-float-a {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(24px, 18px);
+  }
+}
+
+@keyframes glow-float-b {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(-20px, -16px);
+  }
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  @include m.container;
+
+  & {
+    max-width: 860px;
+  }
+}
+
+// Node graph — Software Engineering / Data Analytics / AI, sitting inward
+// right after the name (inside .hero__content, so it's always visible
+// regardless of viewport width or browser zoom). Plain HTML/CSS for the
+// circles/icons/labels (never distorted); SVG used only for the connecting
+// lines and the traveling "data packet" dots.
+.hero__node-graph {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero__node-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hero__node-link {
+  fill: none;
+  stroke: var(--accent-cyan);
+  stroke-width: 0.15;
+  stroke-dasharray: 0.6 0.9;
+  opacity: 0.35;
+  animation: node-dash-flow 6s linear infinite;
+}
+
+@keyframes node-dash-flow {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+.hero__node-packet {
+  fill: var(--accent-cyan);
+  filter: drop-shadow(0 0 1.5px var(--accent-cyan));
+}
+
+.hero__node-packet--2 {
+  fill: var(--accent-indigo);
+  filter: drop-shadow(0 0 1.5px var(--accent-indigo));
+}
+
+.hero__node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  transform: translate(-50%, -50%);
+}
+
+.hero__node-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-cyan);
+  opacity: 0.45;
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.hero__node-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  white-space: nowrap;
+  color: var(--text-tertiary);
+  opacity: 0.6;
+}
+
+@media (max-width: 560px) {
+  .hero__node-graph {
+    display: none;
+  }
+}
+
+.hero__headline {
+  font-size: var(--fs-hero);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  @include m.gradient-text;
+}
+
+.hero__role {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  color: var(--text-primary);
+  flex-wrap: wrap;
+}
+
+.hero__role-word {
+  color: var(--accent-cyan);
+  min-width: 260px;
+  animation: role-fade 0.5s var(--ease-out);
+}
+
+@keyframes role-fade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__mission {
+  font-size: var(--fs-body-lg);
+  line-height: 1.65;
+  color: var(--text-secondary);
+  max-width: 560px;
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-3);
+}
+
+// .hero__scroll-cue {
+//   position: absolute;
+//   bottom: var(--space-6);
+//   left: 50%;
+//   transform: translateX(-50%);
+//   width: 26px;
+//   height: 42px;
+//   border: 2px solid var(--border-strong);
+//   border-radius: var(--radius-pill);
+//   z-index: 1;
+
+//   span {
+//     position: absolute;
+//     top: 6px;
+//     left: 50%;
+//     transform: translateX(-50%);
+//     width: 4px;
+//     height: 8px;
+//     border-radius: 2px;
+//     background: var(--accent-cyan);
+//     animation: scroll-cue 1.8s ease-in-out infinite;
+//   }
+// }
+
+@keyframes scroll-cue {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  70% {
+    opacity: 0;
+    transform: translate(-50%, 16px);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding-top: calc(var(--nav-height) + var(--space-5));
+  }
+
+  .hero__bg {
+    top: calc(var(--nav-height) + var(--space-2));
+  }
+
+  .hero__scroll-cue {
+    display: none;
+  }
+}
+
+@media (max-width: 440px), (max-height: 700px) {
+  .hero {
+    padding-top: calc(var(--nav-height) + var(--space-4));
+    padding-bottom: var(--space-4);
+  }
+
+  .hero__content {
+    gap: var(--space-4);
+  }
+
+  .hero__headline {
+    font-size: clamp(2.75rem, 7vw, 3.75rem);
+  }
+
+  .hero__role {
+    gap: var(--space-2);
+  }
+
+  .hero__mission {
+    font-size: var(--fs-body);
+    max-width: 100%;
+  }
+
+  .hero__actions {
+    gap: var(--space-2);
+  }
+}
+
+@include m.reduced-motion {
+  .hero__grid,
+  .hero__rain-col,
+  .hero__glow,
+  .hero__node-link,
+  .hero__role-word,
+  .hero__scroll-cue span {
+    animation: none;
+  }
+
+  .hero__node-packet {
+    display: none;
+  }
+}

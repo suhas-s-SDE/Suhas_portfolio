@@ -1,0 +1,125 @@
+@use '../../../styles/mixins' as m;
+
+.journey {
+  background: linear-gradient(180deg, transparent, rgba(34, 211, 238, 0.04), transparent);
+  @include m.section-spacing;
+}
+
+.journey__inner {
+  @include m.container;
+}
+
+.journey__road {
+  margin-top: var(--space-8);
+  display: flex;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  overflow-x: auto;
+  padding-bottom: var(--space-3);
+
+  @media (max-width: 780px) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.journey__stop {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  background: none;
+  border: none;
+  padding: var(--space-4) var(--space-2);
+  min-width: 130px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 26px;
+    left: -50%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-indigo), var(--accent-cyan));
+    opacity: 0.35;
+    z-index: 0;
+  }
+
+  &:first-child::before {
+    display: none;
+  }
+
+  @media (max-width: 780px) {
+    flex-direction: row;
+    justify-content: flex-start;
+    min-width: unset;
+
+    &::before {
+      top: -8px;
+      left: 26px;
+      width: 2px;
+      height: 100%;
+    }
+  }
+}
+
+.journey__stop-icon {
+  position: relative;
+  z-index: 1;
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--border-strong);
+  font-size: 1.4rem;
+  transition: all var(--dur-base) var(--ease-out);
+}
+
+.journey__stop-title {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.journey__stop.active {
+  .journey__stop-icon {
+    border-color: var(--accent-cyan);
+    box-shadow: var(--shadow-glow);
+    transform: scale(1.1);
+  }
+  .journey__stop-title {
+    color: var(--text-primary);
+  }
+}
+
+.journey__detail {
+  margin-top: var(--space-6);
+  padding: var(--space-6);
+  @include m.card;
+  min-height: 90px;
+
+  p {
+    color: var(--text-secondary);
+    font-size: var(--fs-body);
+    line-height: 1.7;
+    animation: fade-up var(--dur-base) var(--ease-out);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

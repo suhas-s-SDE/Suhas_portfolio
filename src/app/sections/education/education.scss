@@ -1,0 +1,77 @@
+@use '../../../styles/mixins' as m;
+
+.edu {
+  @include m.section-spacing;
+}
+
+.edu__inner {
+  @include m.container;
+}
+
+.edu__timeline {
+  margin-top: var(--space-7);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  align-items: end;
+
+  @media (max-width: 780px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.edu-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.edu-step__bar-track {
+  width: 100%;
+  max-width: 64px;
+  height: 160px;
+  display: flex;
+  align-items: flex-end;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.edu-step__bar {
+  width: 100%;
+  background: var(--accent-gradient);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  transition: height var(--dur-slow) var(--ease-out);
+}
+
+.edu-step__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.edu-step__year {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--text-tertiary);
+}
+
+.edu-step__institution {
+  font-size: var(--fs-body-lg);
+  font-weight: 700;
+}
+
+.edu-step__credential {
+  color: var(--text-secondary);
+  font-size: var(--fs-small);
+}
+
+.edu-step__score {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-h3);
+  color: var(--accent-amber);
+}

@@ -1,0 +1,30 @@
+<section id="journey" class="journey">
+  <div class="journey__inner">
+    <div appScrollReveal>
+      <span class="section-eyebrow">Engineering Journey</span>
+      <h2 class="section-heading">From academic excellence to future software engineer.</h2>
+    </div>
+
+    <div class="journey__road" appScrollReveal>
+      @for (stage of stages; track stage.title; let i = $index) {
+        <button
+          class="journey__stop"
+          [class.active]="activeStage() === i"
+          (click)="select(i)"
+          [style.--i]="i"
+        >
+          <span class="journey__stop-icon">{{ stage.icon }}</span>
+          <span class="journey__stop-title">{{ stage.title }}</span>
+        </button>
+      }
+    </div>
+
+    <div class="journey__detail">
+      @for (stage of stages; track stage.title; let i = $index) {
+        @if (activeStage() === i) {
+          <p>{{ stage.description }}</p>
+        }
+      }
+    </div>
+  </div>
+</section>
