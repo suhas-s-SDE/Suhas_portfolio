@@ -27,27 +27,27 @@ export const PROFILE: Profile = {
 
 export const STORY_BEATS: StoryBeat[] = [
   {
-    icon: '🎓',
+    icon: '',
     title: 'Academic Excellence',
     body: '96.64% in 10th grade, 96.34% in PU, and a 9.68 CGPA in Information Science Engineering — consistency isn\'t an accident, it\'s a habit I built early and never let go of.',
   },
   {
-    icon: '💻',
+    icon: '',
     title: 'A Passion for Building',
     body: 'What started as curiosity about how software works turned into a habit of shipping — Java, Spring Boot, and Angular are now the tools I reach for to turn ideas into working products.',
   },
   {
-    icon: '📊',
+    icon: '',
     title: 'The Analytics Journey',
     body: 'At Sequoia, I went from writing queries to owning an entire analytics platform — Snowflake data models, Airflow pipelines, and Superset dashboards that leadership actually relies on.',
   },
   {
-    icon: '🧩',
+    icon: '',
     title: 'Full Stack by Design',
     body: 'I care about the whole stack — REST APIs that make sense, Angular UIs that feel effortless, and databases that hold up under real usage. Product thinking, not just code.',
   },
   {
-    icon: '🤖',
+    icon: '',
     title: 'An AI Innovation Mindset',
     body: 'From an IEEE-published adaptive learning platform to AI-driven recommendation engines, I look for where machine learning can make a product genuinely smarter — not just smarter-sounding.',
   },
